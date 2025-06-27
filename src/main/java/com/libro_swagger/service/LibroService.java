@@ -26,13 +26,11 @@ public class LibroService {
         this.editorialRepository = editorialRepository;
     }
 
+
+
     private LibroResponse mapToResponse(Libro libro){
-        String nombreAutor = autorRepository.findById(libro.getAutorId())
-                .map(Autor::getNombreAutor)
-                .orElse("Desconocido");
-        String nombreEditorial = editorialRepository.findById(libro.getEditorialId())
-                .map(Editorial::getNombreEditorial)
-                .orElse("Desconocido");
+        String nombreAutor = libro.getAutor() != null ? libro.getAutor().getNombreAutor() : "Desconocido";
+        String nombreEditorial = libro.getEditorial() != null ? libro.getEditorial().getNombreEditorial() : "Desconocido";
         return new LibroResponse(
                 libro.getId(),
                 libro.getNombreLibro(),
@@ -51,12 +49,14 @@ public class LibroService {
         if (!editorialRepository.existsById(libroRequest.getEditorialId())){
             throw new IllegalArgumentException("El editorial no existe");
         }
-        Libro libro = new Libro(null,libroRequest.getNombreLibro(),
-                                     libroRequest.getCodigoIsbn(),
-                                     libroRequest.getAñoPublicacion(),
-                                     libroRequest.getAutorId(),
-                                     libroRequest.getEditorialId(),
-                                     LocalDateTime.now());
+        Libro libro = Libro.builder()
+                .nombreLibro(libroRequest.getNombreLibro())
+                .codigoIsbn(libroRequest.getCodigoIsbn())
+                .añoPublicacion(libroRequest.getAñoPublicacion())
+                .autorId(libroRequest.getAutorId())
+                .editorialId(libroRequest.getEditorialId())
+                .fechaCreacion(LocalDateTime.now())
+                .build();
         Libro guardado = libroRepository.save(libro);
         return mapToResponse(guardado);
     }
@@ -79,8 +79,8 @@ public class LibroService {
         return mapToResponse(libroActualizado);
     }
 
-    public List<LibroResponse> obtenerLibroPorId(Long id){
-        List<Libro> libros = libroRepository.findByEditorialId(id);
+    public List<LibroResponse> obtenerLibroPorNombre(String nombreEditorial){
+        List<Libro> libros = libroRepository.findByEditorial_NombreEditorial(nombreEditorial);
         return libros.stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());

@@ -46,10 +46,10 @@ public class LibroController {
 
     @Operation(summary = "Obtener libros por editorial")
     @ApiResponse(responseCode = "200", description = "Lista de libros por editorial")
-    @GetMapping("/editorial/{id}")
+    @GetMapping("/editorial/{nombreEditorial}")
     public ResponseEntity<List<LibroResponse>> obtenerLibrosPorEditorial(
-            @PathVariable Long id){
-        List<LibroResponse> libros = libroService.obtenerLibroPorId(id);
+            @PathVariable String nombreEditorial){
+        List<LibroResponse> libros = libroService.obtenerLibroPorNombre(nombreEditorial);
         return ResponseEntity.ok(libros);
     }
 }

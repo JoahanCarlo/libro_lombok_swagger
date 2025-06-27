@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface LibroRepository extends JpaRepository<Libro,Long> {
-    List<Libro> findByEditorialId(Long id);
+    List<Libro> findByEditorial_NombreEditorial(String nombreEditorial);
 }

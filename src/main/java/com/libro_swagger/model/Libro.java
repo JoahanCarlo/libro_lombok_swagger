@@ -28,11 +28,19 @@ public class Libro {
     @NotNull
     private Integer añoPublicacion;
 
-    @Column(name = "autor_id")
+    @Column(name = "autor_id", nullable = false)
     private Long autorId;
 
-    @Column(name = "editorial_id")
+    @Column(name = "editorial_id", nullable = false)
     private Long editorialId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "autor_id",insertable = false,updatable = false,nullable = false)
+    private Autor autor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "editorial_id",insertable = false,updatable = false,nullable = false)
+    private Editorial editorial;
 
     @CreationTimestamp
     @Column(name = "fecha_creacion",updatable = false)
