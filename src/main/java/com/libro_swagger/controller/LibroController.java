@@ -4,6 +4,8 @@ import com.libro_swagger.dtoEntrada.EditorialRequest;
 import com.libro_swagger.dtoEntrada.LibroRequest;
 import com.libro_swagger.dtoSalida.LibroResponse;
 import com.libro_swagger.service.LibroService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -40,5 +42,14 @@ public class LibroController {
                                                           @RequestBody LibroRequest libroRequest){
         LibroResponse actualizarLibro = libroService.actualizarLibro(id,libroRequest);
         return ResponseEntity.ok(actualizarLibro);
+    }
+
+    @Operation(summary = "Obtener libros por editorial")
+    @ApiResponse(responseCode = "200", description = "Lista de libros por editorial")
+    @GetMapping("/editorial/{id}")
+    public ResponseEntity<List<LibroResponse>> obtenerLibrosPorEditorial(
+            @PathVariable Long id){
+        List<LibroResponse> libros = libroService.obtenerLibroPorId(id);
+        return ResponseEntity.ok(libros);
     }
 }

@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(hidden = true)
     private Long id;
 
     @NotBlank

@@ -1,5 +1,6 @@
 package com.libro_swagger.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 public class Libro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(hidden = true)
     private Long id;
 
     @NotBlank
@@ -34,5 +36,6 @@ public class Libro {
 
     @CreationTimestamp
     @Column(name = "fecha_creacion",updatable = false)
+    @Schema(hidden = true)
     private LocalDateTime fechaCreacion;
 }

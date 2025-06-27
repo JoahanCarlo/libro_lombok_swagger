@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Schema(description = "Respuesta a la información del autor")
 public class AutorRequest {
-    private Long id;
     @Schema(description = "Nombre del autor", example = "Mario Vargas Llosa")
     private String nombreAutor;
 

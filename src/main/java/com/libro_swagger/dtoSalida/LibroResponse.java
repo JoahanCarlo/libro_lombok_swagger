@@ -15,7 +15,7 @@ public class LibroResponse {
     private String nombreLibro;
     private String codigoIsbn;
     private Integer añoPublicacion;
-    private Long autorId;
-    private Long editorialId;
+    private String nombreAutor;
+    private String nombreEditorial;
     private LocalDateTime fechaCreacion;
 }

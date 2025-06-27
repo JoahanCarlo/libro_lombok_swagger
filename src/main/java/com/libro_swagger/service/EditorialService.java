@@ -2,7 +2,9 @@ package com.libro_swagger.service;
 
 import com.libro_swagger.dtoEntrada.EditorialRequest;
 import com.libro_swagger.dtoSalida.EditorialResponse;
+import com.libro_swagger.dtoSalida.LibroResponse;
 import com.libro_swagger.model.Editorial;
+import com.libro_swagger.model.Libro;
 import com.libro_swagger.repository.EditorialRepository;
 import org.springframework.stereotype.Service;
 

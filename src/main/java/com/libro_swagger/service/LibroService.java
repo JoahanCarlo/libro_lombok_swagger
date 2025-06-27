@@ -2,6 +2,8 @@ package com.libro_swagger.service;
 
 import com.libro_swagger.dtoEntrada.LibroRequest;
 import com.libro_swagger.dtoSalida.LibroResponse;
+import com.libro_swagger.model.Autor;
+import com.libro_swagger.model.Editorial;
 import com.libro_swagger.model.Libro;
 import com.libro_swagger.repository.AutorRepository;
 import com.libro_swagger.repository.EditorialRepository;
@@ -25,13 +27,19 @@ public class LibroService {
     }
 
     private LibroResponse mapToResponse(Libro libro){
+        String nombreAutor = autorRepository.findById(libro.getAutorId())
+                .map(Autor::getNombreAutor)
+                .orElse("Desconocido");
+        String nombreEditorial = editorialRepository.findById(libro.getEditorialId())
+                .map(Editorial::getNombreEditorial)
+                .orElse("Desconocido");
         return new LibroResponse(
                 libro.getId(),
                 libro.getNombreLibro(),
                 libro.getCodigoIsbn(),
                 libro.getAñoPublicacion(),
-                libro.getAutorId(),
-                libro.getEditorialId(),
+                nombreAutor,
+                nombreEditorial,
                 libro.getFechaCreacion()
         );
     }
@@ -69,5 +77,12 @@ public class LibroService {
 
         Libro libroActualizado = libroRepository.save(libroExistente);
         return mapToResponse(libroActualizado);
+    }
+
+    public List<LibroResponse> obtenerLibroPorId(Long id){
+        List<Libro> libros = libroRepository.findByEditorialId(id);
+        return libros.stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
     }
 }
