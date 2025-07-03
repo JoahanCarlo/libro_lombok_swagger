@@ -1,5 +1,7 @@
 package com.libro_swagger.dtoSalida;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.libro_swagger.config.BooleanToIntegerSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,4 +16,6 @@ public class EditorialResponse {
     private String nombreEditorial;
     private String nombreDireccion;
     private String nombreCorreo;
+    @JsonSerialize(using = BooleanToIntegerSerializer.class)
+    private Boolean estado;
 }

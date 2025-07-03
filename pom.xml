@@ -13,7 +13,7 @@
 	</parent>
 
 	<groupId>com.libro_swagger</groupId>
-	<artifactId>com.libro_swagger</artifactId>
+	<artifactId>libro_swagger_loombok_mapstruct</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>com.libro_swagger</name>
 	<description>proyecto_libro_swagger</description>
@@ -23,7 +23,24 @@
 		<!-- Evita warnings de compilación -->
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
+		<mapstruct.version>1.5.5.Final</mapstruct.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Fuerza Spring Web a la versión 6.1.6 (compatible con Boot 3.5.3) -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>6.1.6</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>6.1.6</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<!-- Spring Data JPA -->
@@ -63,6 +80,19 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.32</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- MapStruct -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>${mapstruct.version}</version>
 			<scope>provided</scope>
 		</dependency>
 

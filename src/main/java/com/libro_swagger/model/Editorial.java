@@ -1,10 +1,7 @@
 package com.libro_swagger.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,4 +27,7 @@ public class Editorial {
 
     @NotBlank
     private String nombreCorreo;
+
+    @Column(nullable = false,columnDefinition = "TINYINT(1) DEFAULT 1")
+    private Boolean estado = true;
 }

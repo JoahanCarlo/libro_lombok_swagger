@@ -46,4 +46,7 @@ public class Libro {
     @Column(name = "fecha_creacion",updatable = false)
     @Schema(hidden = true)
     private LocalDateTime fechaCreacion;
+
+    @Column(nullable = false,columnDefinition = "TINYINT(1) DEFAULT 1")
+    private Boolean estado;
 }
